@@ -1,73 +1,157 @@
-# Welcome to your Lovable project
+# TRUIDA - Smart Biometric Identity System
 
-## Project info
+A privacy-first biometric identity system for seamless airport passenger flow, inspired by Dubai Airport's Smart Tunnel technology.
 
-**URL**: https://lovable.dev/projects/2b38f35f-9453-414d-8d25-7c3abdff10b5
+## 🚀 Features
 
-## How can I edit this code?
+- **✅ Biometric Enrollment**: Face scanning via webcam + fingerprint simulation
+- **✅ Multi-Checkpoint Verification**: Security, Immigration, and Boarding gates
+- **✅ Privacy-Compliant**: SHA-256 hashing, no raw biometric storage
+- **✅ Automatic Cleanup**: Data deletion after flight departure
+- **✅ Staff Dashboard**: Real-time analytics and passenger tracking
+- **✅ Kiosk Interface**: Touch-friendly airport kiosk design
+- **✅ Flight Integration**: Passport and flight detail validation
 
-There are several ways of editing your application.
+## 🛠 Technology Stack
 
-**Use Lovable**
+- **Frontend**: React 18 + TypeScript
+- **UI Framework**: Tailwind CSS + shadcn/ui components
+- **Biometrics**: Hugging Face Transformers (face detection)
+- **Camera Access**: Browser MediaDevices API
+- **Data Storage**: Browser localStorage with automatic cleanup
+- **Build Tool**: Vite
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/2b38f35f-9453-414d-8d25-7c3abdff10b5) and start prompting.
+## 📦 Installation & Setup
 
-Changes made via Lovable will be committed automatically to this repo.
+```bash
+# Clone the repository
+git clone <repository-url>
 
-**Use your preferred IDE**
+# Navigate to project directory
+cd truida-system
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+# Install dependencies
+npm install
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open [http://localhost:5173](http://localhost:5173) to view the application.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🎯 Usage Guide
 
-**Use GitHub Codespaces**
+### 1. Passenger Enrollment
+- Click "Passenger Enrollment" on the main menu
+- Allow camera access for face scanning
+- Upload fingerprint image (simulation)
+- Enter passport number and flight details
+- System generates unique biometric identity token
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### 2. Checkpoint Verification
+- **Security Checkpoint**: Initial biometric verification
+- **Immigration**: Passport and biometric validation
+- **Boarding Gate**: Final boarding clearance
+- Each checkpoint re-scans face and matches stored identity
 
-## What technologies are used for this project?
+### 3. Staff Dashboard
+- Real-time passenger statistics
+- Checkpoint completion tracking
+- Recent activity logs
+- System health monitoring
 
-This project is built with:
+## 🏗 System Architecture
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Enrollment    │    │   Checkpoints    │    │ Staff Dashboard │
+│     Station     │    │  (3 Stations)    │    │                 │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+         │                       │                       │
+         └───────────────────────┼───────────────────────┘
+                                 │
+                    ┌─────────────────────┐
+                    │   Biometric Utils   │
+                    │   - Face Detection  │
+                    │   - Hash Generation │
+                    │   - Similarity Match│
+                    └─────────────────────┘
+                                 │
+                    ┌─────────────────────┐
+                    │    Data Store       │
+                    │   - localStorage    │
+                    │   - Auto Cleanup    │
+                    │   - Staff Logs      │
+                    └─────────────────────┘
+```
 
-## How can I deploy this project?
+## 🔒 Security & Privacy
 
-Simply open [Lovable](https://lovable.dev/projects/2b38f35f-9453-414d-8d25-7c3abdff10b5) and click on Share -> Publish.
+- **No Raw Storage**: Biometric images are processed and immediately discarded
+- **SHA-256 Hashing**: All biometric data is cryptographically hashed
+- **Local Processing**: No biometric data leaves the device
+- **Automatic Deletion**: Passenger data auto-deleted after flight departure
+- **Minimal Data**: Only essential flight and identity information stored
 
-## Can I connect a custom domain to my Lovable project?
+## 📊 Data Flow
 
-Yes, you can!
+1. **Enrollment**: Face scan → Hash generation → Secure storage
+2. **Verification**: Face re-scan → Hash comparison → Access decision
+3. **Cleanup**: Flight departure → Automatic data deletion
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🎨 UI/UX Features
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- **Airport Kiosk Design**: Large buttons, high contrast, accessibility-focused
+- **Real-time Feedback**: Instant biometric matching results
+- **Dark/Light Mode**: Automatic theme switching
+- **Responsive Design**: Works on tablets and touch screens
+- **Progressive Enhancement**: Graceful degradation without camera access
+
+## 🚀 Future Enhancements
+
+- [ ] Integration with real airport systems
+- [ ] NFT-based identity tokens
+- [ ] Multi-language support
+- [ ] Advanced biometric algorithms
+- [ ] Cloud backend integration
+- [ ] Mobile companion app
+- [ ] Blockchain verification
+- [ ] Integration with airline APIs
+
+## 🧪 Development
+
+### Project Structure
+```
+src/
+├── components/
+│   ├── ui/              # shadcn/ui components
+│   ├── EnrollmentStation.tsx
+│   ├── CheckpointStation.tsx
+│   ├── StaffDashboard.tsx
+│   └── MainMenu.tsx
+├── lib/
+│   ├── biometric-utils.ts    # Biometric processing
+│   ├── data-store.ts         # Data management
+│   └── utils.ts              # Utilities
+└── pages/
+    └── Index.tsx             # Main application
+```
+
+### Key Components
+- **EnrollmentStation**: Handles passenger registration and biometric capture
+- **CheckpointStation**: Manages verification at security, immigration, and boarding
+- **StaffDashboard**: Provides analytics and system monitoring
+- **BiometricUtils**: Core biometric processing and hashing functions
+- **DataStore**: localStorage management with automatic cleanup
+
+## 📄 License
+
+This project is a prototype demonstration of biometric identity systems for educational and development purposes.
+
+## 🤝 Contributing
+
+This is a prototype project. For suggestions or improvements, please open an issue or submit a pull request.
+
+---
+
+**Disclaimer**: This is a demonstration prototype. Not intended for production use in real airport environments without proper security audits and compliance certifications.
